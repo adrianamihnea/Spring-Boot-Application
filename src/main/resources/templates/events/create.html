@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body class="container">
 
-<h1>Create Event</h1>
+<header th:replace="fragments :: header"></header>
 
-<nav th:replace="fragments :: navigation"></nav>
-
-<form method="post" action="/events/create">
+<form method="post">
     <div class="form-group">
         <label>Name
             <input th:field="${event.name}" class="form-control">
@@ -18,30 +15,29 @@
     <div class="form-group">
         <label>Description
             <input th:field="${event.description}" class="form-control">
-            <p class="error" th:errors="${event.description}"></p>
         </label>
+        <p class="error" th:errors="${event.description}"></p>
     </div>
     <div class="form-group">
         <label>Contact Email
             <input th:field="${event.contactEmail}" class="form-control">
-            <p class="error" th:errors="${event.contactEmail}"></p>
+        </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
+    </div>
+    <div class="form-group">
+        <label>Type
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}"
+                ></option>
+            </select>
         </label>
     </div>
     <div class="form-group">
-        <label>Category
-        <select th:field="${event.eventCategory}">
-            <option th:each="eventCategory : ${categories}"
-                    th:value="${eventCategory.id}"
-                    th:text="${eventCategory.name}"
-            ></option>
-        </select>
-            <p class="error" th:errors="${event.eventCategory}"></p>
-        </label>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create Event" class="btn btn-success">
+        <input type="submit" value="Create" class="btn btn-success">
     </div>
 </form>
-</body>
 
+</body>
 </html>

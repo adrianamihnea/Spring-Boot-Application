@@ -1,28 +1,19 @@
 package com.example.codingevents.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class EventCategory extends AbstractEntity {
 
-    @Size(min = 3, message = "Name must be at least 3 characters long")
+    @Size(min=3, message="Name must be at least 3 characters long")
     private String name;
 
-    @OneToMany(mappedBy = "eventCategory")
-    private List<Event> events = new ArrayList<>();
-
-    public EventCategory(@Size(min = 3, message = "Name must be at least 3 characters long")
-                         String name) {
+    public EventCategory(@Size(min = 3, message = "Name must be at least 3 characters long") String name) {
         this.name = name;
     }
 
-    public EventCategory() {
-    }
+    public EventCategory() {}
 
     public String getName() {
         return name;
@@ -30,10 +21,6 @@ public class EventCategory extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Event> getEvents() {
-        return events;
     }
 
     @Override

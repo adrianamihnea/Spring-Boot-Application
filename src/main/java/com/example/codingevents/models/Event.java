@@ -9,40 +9,30 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.validation.annotation.Validated;
-@Validated
 @Entity
 public class Event extends AbstractEntity {
 
     @NotBlank(message = "Name is required")
-    @Size(min=3, max=50, message = "Name must be between 3 and 50 characters.")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
-    @Size(max = 500, message = "Description too long.")
+
+    @Size(max = 500, message = "Description too long!")
     private String description;
+
     @NotBlank(message = "Email is required")
-    @Email(message="Invalid email. Try again.")
+    @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    @ManyToOne
-    @NotNull(message = "Category is required")
-    private EventCategory eventCategory;
+    private EventType type;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Event(String name, String description, String contactEmail,
-                 EventCategory eventCategory) {
+    public Event(String name, String description, String contactEmail, EventType type) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.eventCategory = eventCategory;
+        this.type = type;
     }
 
-    public Event() {};
+    public Event() {}
 
     public String getName() {
         return name;
@@ -52,9 +42,12 @@ public class Event extends AbstractEntity {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return name;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getContactEmail() {
@@ -65,15 +58,17 @@ public class Event extends AbstractEntity {
         this.contactEmail = contactEmail;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public EventType getType() {
+        return type;
     }
 
-    public EventCategory getEventCategory() {
-        return eventCategory;
+    public void setType(EventType type) {
+        this.type = type;
     }
 
-    public void setEventCategory(EventCategory eventCategory) {
-        this.eventCategory = eventCategory;
+    @Override
+    public String toString() {
+        return name;
     }
+
 }
